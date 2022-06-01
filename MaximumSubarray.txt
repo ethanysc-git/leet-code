@@ -1,0 +1,20 @@
+class Solution:
+    def maxSubArray(self, nums):
+
+        def divide_and_conquer(nums, l, r):
+            
+            if l == r-1:
+                return nums[l],nums[l],nums[l],nums[l]
+
+            mid = l+(r-l)//2
+            head_sum_l, tail_sum_l, sum_l, max_sum_l = divide_and_conquer(nums, l, mid)
+            head_sum_r, tail_sum_r, sum_r, max_sum_r = divide_and_conquer(nums, mid, r)
+            head_sum = max(head_sum_l, max_sum_l+head_sum_r)
+            tail_sum = max(sum_r, max_sum_r+sum_l)
+            max_one = max(tail_sum_l,tail_sum_r,sum_l+head_sum_r)
+            max_sum = max_sum_l+max_sum_r
+            
+            return head_sum,max_one,tail_sum,max_sum
+                 
+        _,m,_,_ = divide_and_conquer(nums, 0, len(nums))
+        return m
