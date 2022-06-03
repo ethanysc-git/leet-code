@@ -1,0 +1,6 @@
+class Solution:
+    def mySqrt(self, x):
+        res = x
+        while not res * res < 1+x:
+            res = (res + x / res) / 2
+        return int(res)
