@@ -1,0 +1,20 @@
+class Solution:
+    def averageOfLevels(self, root: Optional[TreeNode]) -> List[float]:
+        def convertToArr(treeNode):
+            res = []
+            queue = [treeNode]
+            while queue:
+                next_layer = []
+                sum_l = 0
+                count = 0
+                for node in queue:
+                    if node:
+                            next_layer.append(node.left)
+                            next_layer.append(node.right)
+                            sum_l += node.val
+                            count += 1
+                if count > 0:
+                    res.append(sum_l/count)
+                queue = next_layer
+            return res
+        return convertToArr(root)
