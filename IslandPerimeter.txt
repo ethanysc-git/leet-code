@@ -1,0 +1,12 @@
+class Solution:
+    def islandPerimeter(self, grid: List[List[int]]) -> int:
+        c_grid = [x for x in map(list, zip(*grid))]
+        grid = grid + c_grid
+        sum_p = 0
+        for i in grid:
+            r_side = [0] + i
+            l_side = i + [0]
+            for j in range(len(r_side)):
+                if r_side[j] != l_side[j]:
+                    sum_p += 1
+        return sum_p
