@@ -1,0 +1,14 @@
+class Solution:
+    def minDepth(self, root: Optional[TreeNode]) -> int:
+        if not root:
+            return 0
+        root_q = deque()
+        root_q.append([root,1])
+        while root_q:
+            curr, d = root_q.popleft()
+            if not curr.left and not curr.right:
+                return d
+            if curr.left:
+                root_q.append([curr.left, d + 1])
+            if curr.right:
+                root_q.append([curr.right, d + 1])
