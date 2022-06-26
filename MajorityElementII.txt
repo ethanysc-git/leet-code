@@ -1,0 +1,31 @@
+class Solution:
+    def majorityElement(self, nums: List[int]) -> List[int]:
+        major1, major2 = None, None
+        maj1_c, maj2_c = 0, 0
+        res = []
+        for i in nums:
+            if major1 == i:
+                maj1_c += 1
+                continue
+            if major2 == i:
+                maj2_c += 1
+                continue
+            if maj1_c == 0:
+                major1, maj1_c = i, 1
+                continue
+            if maj2_c == 0:
+                major2, maj2_c = i, 1
+                continue
+            maj1_c -= 1
+            maj2_c -= 1
+        maj1_c, maj2_c = 0, 0
+        for r in nums:
+            if r == major1:
+                maj1_c += 1
+            if r == major2:
+                maj2_c += 1
+        if maj1_c > len(nums)/3:
+            res.append(major1)
+        if maj2_c > len(nums)/3:
+            res.append(major2)
+        return res
